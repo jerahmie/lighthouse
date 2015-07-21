@@ -5,9 +5,7 @@ AVRDUDE=/usr/bin/avrdude
 TARGET=lighthouse
 
 program : $(TARGET).hex
-	$(AVRDUDE) -p m1
-	$(AVRDUDE) -dprog=stk500 -dserial=/dev/ttyS1 --upload -dpart=atmega32
-		if=$(TARGET).hex -v=2
+	$(AVRDUDE) -c avrispmkII  -p m32 -U flash:w:$(TARGET).hex 
 %.obj : %.o
 	$(CC) $(CFLAGS) $< -o $@
 
